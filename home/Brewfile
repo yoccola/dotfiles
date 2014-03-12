@@ -1,7 +1,7 @@
 untap phinze/homebrew-cask || true
 untap homebrew/versions || true
-uptap homebrew/dupes || true
-uptap josegonzalez/homebrew-php || true
+untap homebrew/dupes || true
+untap josegonzalez/homebrew-php || true
 
 tap homebrew/dupes || true
 tap josegonzalez/homebrew-php || true
