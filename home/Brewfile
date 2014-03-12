@@ -1,0 +1,98 @@
+untap phinze/homebrew-cask || true
+untap homebrew/versions || true
+uptap homebrew/dupes || true
+uptap josegonzalez/homebrew-php || true
+
+tap homebrew/dupes || true
+tap josegonzalez/homebrew-php || true
+tap phinze/homebrew-cask || true
+tap homebrew/versions|| true
+update || true
+
+install apple-gcc42 || true
+install autoconf || true
+install automake || true
+install brew-cask || true
+install cmake || true
+install cpanminus || true
+install curl || true
+install fish || true
+install fontconfig || true
+install fontforge || true
+install freetype || true
+install gettext || true
+install gibo || true
+install git || true
+install git-flow || true
+install grep || true
+install heroku-toolbelt || true
+install htop-osx || true
+install hub || true
+install icu4c || true
+install jasper || true
+install jpeg || true
+install jq || true
+install libevent || true
+install libicns || true
+install libpng || true
+install libtiff || true
+install libtool || true
+install libyaml || true
+install little-cms || true
+install llvm || true
+install memcached || true
+install mysql || true
+install neon || true
+install nginx ||  true
+install opam || true
+install openssl || true
+install pcre || true
+install pkg-config || true
+install pwgen || true
+install python3 || true
+install rbenv || true
+install rbenv-gem-reh || trueash
+install rbenv-gemset || true
+install readline || true
+install redis || true
+install rpm2cpio || true
+install ruby-build || true
+install scons || true
+install sqlite || true
+install subversion17 || true
+install tig || true
+install tmux || true
+install tree || true
+install wget || true
+install wine3 || true
+install xctool || true
+install xz || true
+install zsh || true
+
+# Applications
+cask install alfred || true
+cask install appcleaner || true
+cask install dropbox || true
+cask install firefox || true
+cask install github || true
+cask install google-chrome || true
+cask install hipchat || true
+cask install iterm2 || true
+cask install keyremap4macbook || true
+cask install kindle || true
+cask install light-table || true
+cask install robomongo || true
+cask install skype || true
+cask install sourcetree || true
+cask install sublime-text || true
+cask install totalfinder || true
+cask install totalterminal || true
+cask install vagrant || true
+cask install virtualbox || true
+
+# Settings
+cask alfred
+cask alfred link
+
+# Remove outdated versions
+cleanup
