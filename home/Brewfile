@@ -51,7 +51,7 @@ install pkg-config || true
 install pwgen || true
 install python3 || true
 install rbenv || true
-install rbenv-gem-reh || trueash
+install rbenv-gem-rehash || true
 install rbenv-gemset || true
 install readline || true
 install redis || true

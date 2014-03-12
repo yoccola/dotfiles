@@ -1,9 +1,12 @@
 # (d) is default on
 
 # Alias
+alias bi='brew install'
 alias vag='vagrant'
 alias ll='ls -la'
 alias view='vi -R'
+alias r=rails
+alias v=vim
 alias sci='svn ci --username=h-imai'
 alias drop='ssh drop'
 alias apsvn='ssh apsvn'
@@ -169,10 +172,6 @@ case "${OSTYPE}" in
   ;;
 esac
 
-### Aliases ###
-alias r=rails
-alias v=vim
-
 # Editor
 SVN_EDITOR='vi'
 EDITOR='vi'
@@ -201,3 +200,6 @@ export PATH
 
 # for tmux
 PS1="$PS1"'$([ -n "$TMUX" ] && tmux setenv TMUXPWD_$(tmux display -p "#D" | tr -d %) "$PWD")'
+
+# homebrew cask
+export HOMEBREW_CASK_OPTS="--appdir=/Applications --caskroom=/usr/local/Caskroom"
