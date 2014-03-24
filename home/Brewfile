@@ -2,11 +2,13 @@ untap phinze/homebrew-cask || true
 untap homebrew/versions || true
 untap homebrew/dupes || true
 untap josegonzalez/homebrew-php || true
+untap jimbojsb/launchrocket || true
 
 tap homebrew/dupes || true
 tap josegonzalez/homebrew-php || true
 tap phinze/homebrew-cask || true
-tap homebrew/versions|| true
+tap homebrew/versions || true
+tap jimbojsb/launchrocket || true
 update || true
 
 install apple-gcc42 || true
@@ -80,6 +82,7 @@ cask install hipchat || true
 cask install iterm2 || true
 cask install keyremap4macbook || true
 cask install kindle || true
+cask install launchrocket || true
 cask install skype || true
 cask install sourcetree || true
 cask install sublime-text || true
