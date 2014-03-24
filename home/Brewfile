@@ -78,6 +78,7 @@ cask install dropbox || true
 cask install firefox || true
 cask install github || true
 cask install google-chrome || true
+cask install haroopad || true
 cask install hipchat || true
 cask install iterm2 || true
 cask install keyremap4macbook || true
