@@ -2,7 +2,6 @@
 
 # Alias
 alias bi='brew install'
-alias vag='vagrant'
 alias ll='ls -la'
 alias view='vi -R'
 alias r=rails
@@ -25,6 +24,15 @@ alias treex="tree -NF | perl -pe 's/^├── //g; s/^└── //g; s/^│\xc2
 # For Git
 alias gst='git status -sb'
 alias glo='git log --oneline --decorate'
+
+# For Vagrant
+alias vg='vagrant'
+alias vgi='vagrant init'
+alias vgup='vagrant up'
+alias vgupp='vagrant up --provision'
+alias vgs='vagrant status'
+alias vgd='vagrant destroy'
+
 
 # ------------------------------
 # General Settings
