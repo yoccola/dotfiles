@@ -1,5 +1,6 @@
 # (d) is default on
 
+
 # Alias
 alias bi='brew install'
 alias ll='ls -la'
