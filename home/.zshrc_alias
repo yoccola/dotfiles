@@ -1,0 +1,38 @@
+# (d) is default on
+
+
+# Alias
+alias bi='brew install'
+alias ll='ls -la'
+alias view='vi -R'
+alias r=rails
+alias v=vim
+alias sci='svn ci --username=h-imai'
+alias drop='ssh drop'
+alias apsvn='ssh apsvn'
+alias stu='svn st -u'
+alias sdi='svn di'
+alias up='cd ..'
+alias upp='cd ../..'
+alias uppp='cd ../../..'
+alias psa='ps aux'
+alias psag='ps aux | grep'
+alias hi='history'
+alias zipp='zip -e -r'
+alias updatedb='sudo /usr/libexec/locate.updatedb'
+alias treex="tree -NF | perl -pe 's/^├── //g; s/^└── //g; s/^│\xc2\xa0\xc2\xa0\x20//g; s/├── /\t/g; s/│\xc2\xa0\xc2\xa0\x20/\t/g; s/└── /\t/g; s/    /\t/g; s/\*$//g; s/^\.\n//g;'"
+
+# For Git
+alias gst='git status -sb'
+alias glo='git log --oneline --decorate'
+
+# For Vagrant
+alias vg='vagrant'
+alias vgi='vagrant init'
+alias vgupp='vagrant up --provision'
+alias vgs='vagrant status'
+alias vgd='vagrant destroy'
+# For Vagrant Sandbox
+alias vgx='vagrant sandbox'
+
+
