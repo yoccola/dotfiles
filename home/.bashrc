@@ -1,3 +1,10 @@
+# .bashrc
+
+# Source global definitions
+if [ -f /etc/bashrc ]; then
+  . /etc/bashrc
+fi
+
 alias updatedb='/usr/libexec/locate.updatedb'
 alias ll='ls -lat'
 alias vi='vim'

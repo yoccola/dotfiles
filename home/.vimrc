@@ -161,3 +161,11 @@ endif
 "nnoremap <silent> cy   ce<C-r>0<ESC>:let@/=@1<CR>:noh<CR>
 "vnoremap <silent> cy   c<C-r>0<ESC>:let@/=@1<CR>:noh<CR>
 
+nnoremap J 10j
+nnoremap K 10k
+nnoremap L 10l
+nnoremap H 10h
+vnoremap J 10j
+vnoremap K 10k
+vnoremap L 10l
+vnoremap H 10h
