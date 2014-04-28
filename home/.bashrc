@@ -21,6 +21,9 @@ alias psa='ps aux'
 alias psag='ps aux | grep'
 alias hi='history'
 
+# Git
+alias gb='git branch'
+
 SVN_EDITOR='vi'
 EDITOR='vi'
 export SVN_EDITOR
@@ -30,3 +33,6 @@ export PATH=~/bin:/usr/local/bin:$PATH
 # history
 export HISTSIZE=3000
 export PATH="$(brew --prefix)/bin:$PATH"
+
+# homebrew cask
+export HOMEBREW_CASK_OPTS="--appdir=/Applications --caskroom=/usr/local/Caskroom"

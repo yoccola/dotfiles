@@ -23,6 +23,7 @@ alias updatedb='sudo /usr/libexec/locate.updatedb'
 alias treex="tree -NF | perl -pe 's/^├── //g; s/^└── //g; s/^│\xc2\xa0\xc2\xa0\x20//g; s/├── /\t/g; s/│\xc2\xa0\xc2\xa0\x20/\t/g; s/└── /\t/g; s/    /\t/g; s/\*$//g; s/^\.\n//g;'"
 
 # For Git
+alias gb='git branch'
 alias gst='git status -sb'
 alias glo='git log --oneline --decorate'
 
