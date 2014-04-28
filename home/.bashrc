@@ -32,7 +32,15 @@ export PATH=~/bin:/usr/local/bin:$PATH
 
 # history
 export HISTSIZE=3000
-export PATH="$(brew --prefix)/bin:$PATH"
 
-# homebrew cask
-export HOMEBREW_CASK_OPTS="--appdir=/Applications --caskroom=/usr/local/Caskroom"
+
+# environment setting
+case "${OSTYPE}" in
+  darwin*)
+ # for mac
+  # Homebrew
+  export PATH="$(brew --prefix)/bin:$PATH"
+  # Homebrew Cask
+  export HOMEBREW_CASK_OPTS="--appdir=/Applications --caskroom=/usr/local/Caskroom"
+  ;;
+esac

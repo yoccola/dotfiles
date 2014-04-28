@@ -133,9 +133,6 @@ if [[ -s ~/.rvm/scripts/rvm ]] ; then source ~/.rvm/scripts/rvm ; fi
 ### Command PATH
 PATH=/usr/local/bin:/bin:$PATH
 
-### HomeBrew
-PATH="$(brew --prefix)/bin:$PATH"
-
 ### Gem
 GEM_BIN=$(ruby -e 'require "rubygems"; puts Gem::bindir')
 PATH=$GEM_BIN:$PATH
@@ -144,14 +141,19 @@ PATH=$GEM_BIN:$PATH
 ### Macports ###
 case "${OSTYPE}" in
   darwin*)
+  # for mac
     export PATH=/opt/local/bin:/opt/local/sbin:$PATH
     export MANPATH=/opt/local/share/man:/opt/local/man:$MANPATH
+    # Homebrew
+    PATH="$(brew --prefix)/bin:$PATH"
+    # Homebrew Cask
+    export HOMEBREW_CASK_OPTS="--appdir=/Applications --caskroom=/usr/local/Caskroom"
   ;;
 esac
 
 # Editor
-SVN_EDITOR='vi'
-EDITOR='vi'
+SVN_EDITOR='vim'
+EDITOR='vim'
 export SVN_EDITOR
 export EDITOR
 
@@ -178,5 +180,3 @@ export PATH
 # for tmux
 PS1="$PS1"'$([ -n "$TMUX" ] && tmux setenv TMUXPWD_$(tmux display -p "#D" | tr -d %) "$PWD")'
 
-# homebrew cask
-export HOMEBREW_CASK_OPTS="--appdir=/Applications --caskroom=/usr/local/Caskroom"
