@@ -38,4 +38,5 @@ alias vgx='vagrant sandbox'
 
 # For Azure command-line tool
 alias az='azure'
+alias aza='azure account'
 
