@@ -24,6 +24,9 @@ alias hi='history'
 # Git
 alias gb='git branch'
 
+# Azure command-line tool
+alias az=azure
+
 SVN_EDITOR='vi'
 EDITOR='vi'
 export SVN_EDITOR

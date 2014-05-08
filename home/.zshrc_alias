@@ -36,4 +36,6 @@ alias vgd='vagrant destroy'
 # For Vagrant Sandbox
 alias vgx='vagrant sandbox'
 
+# For Azure command-line tool
+alias az='azure'
 
