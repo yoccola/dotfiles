@@ -48,3 +48,8 @@ case "${OSTYPE}" in
   export HOMEBREW_CASK_OPTS="--appdir=/Applications --caskroom=/usr/local/Caskroom"
   ;;
 esac
+
+# Local Settings
+if [ -f ~/.bashrc_local ]; then
+  . ~/.bashrc_local
+fi
