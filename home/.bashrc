@@ -46,8 +46,8 @@ case "${OSTYPE}" in
   export PATH="$(brew --prefix)/bin:$PATH"
   # Homebrew Cask
   export HOMEBREW_CASK_OPTS="--appdir=/Applications --caskroom=/usr/local/Caskroom"
-  # Python3
-  export PATH=$PATH:/usr/local/share/python3
+  # Python
+  export PATH=$PATH:/usr/local/share/python
   ;;
 esac
 

@@ -52,7 +52,8 @@ install pcre || true
 install pkg-config || true
 install phpstorm || true
 install pwgen || true
-install python3 || true
+#install python3 || true
+install python || true
 install rbenv || true
 install rbenv-gem-rehash || true
 install rbenv-gemset || true
