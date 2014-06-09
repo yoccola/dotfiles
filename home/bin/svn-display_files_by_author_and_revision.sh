@@ -14,5 +14,7 @@ if [ "$FLG_A" != "TRUE" ]; then
   echo "Usage: $CMDNAME [-a AUTHOR_NAME] [-r FROM_REVISION]"
 fi
 
+# TODO:execute directly
+echo "svn log -r{$REV}:HEAD -v | sed -n '/$AUTHOR/,/-----$/ p' | grep '^ ' | awk '{ print \$2 }' | sort -u"
 #svn log -r{$REV}:HEAD -v | sed -n '/$AUTHOR/,/-----$/ p' | grep '^ ' | awk '{ print $2 }' | sort -u
 
