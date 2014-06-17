@@ -21,7 +21,7 @@ alias hi='history'
 alias zipp='zip -e -r'
 alias updatedb='sudo /usr/libexec/locate.updatedb'
 alias treex="tree -NF | perl -pe 's/^├── //g; s/^└── //g; s/^│\xc2\xa0\xc2\xa0\x20//g; s/├── /\t/g; s/│\xc2\xa0\xc2\xa0\x20/\t/g; s/└── /\t/g; s/    /\t/g; s/\*$//g; s/^\.\n//g;'"
-alias svn-lar='svn-display_files_by_author_and_revision.sh'
+alias hs='homesick'
 
 # For Git
 alias gb='git branch'
