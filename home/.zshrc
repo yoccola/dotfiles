@@ -119,7 +119,7 @@ esac
 if [[ -s ~/.rvm/scripts/rvm ]] ; then source ~/.rvm/scripts/rvm ; fi
 
 ### Command PATH
-PATH=/usr/local/bin:/bin:~/.homesick/repos/dotfiles/home/bin:$PATH
+PATH=/bin:~/.homesick/repos/dotfiles/home/bin:$PATH
 
 ### Gem
 GEM_BIN=$(ruby -e 'require "rubygems"; puts Gem::bindir')
