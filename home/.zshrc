@@ -41,15 +41,8 @@ setopt equals            # =commandを`which command`と同じ処理にする
 setopt extended_glob # グロブ機能を拡張する
 unsetopt caseglob    # ファイルグロブで大文字小文字を区別しない
 
-# マッチしたコマンドのヒストリを表示できるようにする
-#autoload history-search-end
-#zle -N history-beginning-search-backward-end history-search-end
-#zle -N history-beginning-search-forward-end history-search-end
-#bindkey "^P" history-beginning-search-backward-end
-#bindkey "^N" history-beginning-search-forward-end
-
 # すべてのヒストリを表示する
-function hall { history -E 1 }
+#function hall { history -E 1 }
 
 # ------------------------------
 # Look And Feel Settings
