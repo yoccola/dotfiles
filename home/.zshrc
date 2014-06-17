@@ -52,13 +52,16 @@ unsetopt caseglob    # ファイルグロブで大文字小文字を区別しな
 
 ### History ###
 HISTFILE=~/.zsh_history   # ヒストリを保存するファイル
-HISTSIZE=10000            # メモリに保存されるヒストリの件数
+HISTSIZE=5000             # メモリに保存されるヒストリの件数
 SAVEHIST=10000            # 保存されるヒストリの件数
 setopt bang_hist          # !を使ったヒストリ展開を行う(d)
 setopt extended_history   # ヒストリに実行時間も保存する
 setopt hist_ignore_dups   # 直前と同じコマンドはヒストリに追加しない
 setopt share_history      # 他のシェルのヒストリをリアルタイムで共有する
 setopt hist_reduce_blanks # 余分なスペースを削除してヒストリに保存する
+export HISTSIZE
+export HISTCONTROL=ignoredups #ignoredups,ignorespace,erasedups
+export HISTIGNORE=history:which   #you can use wild cart(*,?)
 
 # マッチしたコマンドのヒストリを表示できるようにする
 autoload history-search-end
@@ -68,38 +71,11 @@ bindkey "^P" history-beginning-search-backward-end
 bindkey "^N" history-beginning-search-forward-end
 
 # すべてのヒストリを表示する
-function history-all { history -E 1 }
-
+function hall { history -E 1 }
 
 # ------------------------------
 # Look And Feel Settings
 # ------------------------------
-# プロンプトに色を付ける
-autoload -U colors; colors
-autoload colors; colors;
-
-# LSCOLORS/LS_COLORS
-LS_COLORS="di=01;34:ln=01;36:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=01;05;37;41:mi=01;05;37;41:su=37;41:sg=30;43:tw=30;42:ow=34;42:st=37;44:ex=01;32";
-LSCOLORS="fxGxFxDxCxDxDxhbhdacEc";
-
-# Do we need Linux or BSD Style?
-if ls --color -d . &>/dev/null 2>&1
-then
-  # Linux Style
-  export LS_COLORS=$LS_COLORS
-  alias ls='ls --color=tty'
-else
-  # BSD Style
-  export LSCOLORS=$LSCOLORS
-  alias ls='ls -G'
-fi
-
-# Use same colors for autocompletion
-zmodload -a colors
-zmodload -a autocomplete
-zmodload -a complist
-zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
-
 export CLICOLOR=true
 
 ### Title (user@hostname) ###
@@ -110,7 +86,6 @@ kterm*|xterm*|)
   }
   ;;
 esac
-
 
 # ------------------------------
 # Other Settings
@@ -125,8 +100,7 @@ PATH=/bin:~/.homesick/repos/dotfiles/home/bin:$PATH
 GEM_BIN=$(ruby -e 'require "rubygems"; puts Gem::bindir')
 PATH=$GEM_BIN:$PATH
 
-
-### Macports ###
+### Environment dependence settings ###
 case "${OSTYPE}" in
   darwin*)
   # for mac
@@ -147,19 +121,9 @@ EDITOR='vim'
 export SVN_EDITOR
 export EDITOR
 
-# history
-export HISTSIZE=5000
-export HISTCONTROL=ignoredups #ignoredups,ignorespace,erasedups
-export HISTIGNORE=history:which   #you can use wild cart(*,?)
-
 # cdコマンド実行後、lsを実行する
 function cd() {
   builtin cd $@ && ls -lat;
-}
-
-#function history-all {
-function hall() {
-  history -E 1
 }
 
 export PATH

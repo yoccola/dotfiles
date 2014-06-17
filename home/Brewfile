@@ -72,6 +72,7 @@ install wine3 || true
 install xctool || true
 install xz || true
 install zsh || true
+install zsh-completions || true
 
 # Applications
 cask install alfred || true
