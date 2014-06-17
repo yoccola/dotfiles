@@ -12,6 +12,7 @@ done
 
 if [ "$FLG_A" != "TRUE" ]; then
   echo "Usage: $CMDNAME [-a AUTHOR_NAME] [-r FROM_REVISION]"
+  exit
 fi
 
 # TODO:execute directly
