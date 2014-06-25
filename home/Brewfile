@@ -3,12 +3,14 @@ untap homebrew/versions || true
 untap homebrew/dupes || true
 untap josegonzalez/homebrew-php || true
 untap jimbojsb/launchrocket || true
+untap peco/peco || true
 
 tap homebrew/dupes || true
 tap josegonzalez/homebrew-php || true
 tap phinze/homebrew-cask || true
 tap homebrew/versions || true
 tap jimbojsb/launchrocket || true
+tap peco/peco || true
 update || true
 
 install apple-gcc42 || true
@@ -26,6 +28,7 @@ install gettext || true
 install gibo || true
 install git || true
 install git-flow || true
+install go || true
 install grep || true
 install heroku-toolbelt || true
 install htop-osx || true
@@ -49,6 +52,7 @@ install nginx ||  true
 install opam || true
 install openssl || true
 install pcre || true
+install peco || true
 install pkg-config || true
 install phpstorm || true
 install pwgen || true

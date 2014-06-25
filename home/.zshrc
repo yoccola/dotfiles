@@ -64,25 +64,28 @@ esac
 ### RVM ###
 if [[ -s ~/.rvm/scripts/rvm ]] ; then source ~/.rvm/scripts/rvm ; fi
 
-### Command PATH
-PATH=/bin:~/.homesick/repos/dotfiles/home/bin:$PATH
-
-### Gem
-GEM_BIN=$(ruby -e 'require "rubygems"; puts Gem::bindir')
-PATH=$GEM_BIN:$PATH
-
 ### Environment dependence settings ###
 case "${OSTYPE}" in
   darwin*)
   # for mac
-    export PATH=/opt/local/bin:/opt/local/sbin:$PATH
-    export MANPATH=/opt/local/share/man:/opt/local/man:$MANPATH
+
+    ### Command PATH
+    PATH=/bin:~/.homesick/repos/dotfiles/home/bin:$PATH
+
+    # Gem
+    GEM_BIN=$(ruby -e 'require "rubygems"; puts Gem::bindir')
+    PATH=$GEM_BIN:$PATH
+    # Mac Ports
+    PATH=/opt/local/bin:/opt/local/sbin:$PATH
+    MANPATH=/opt/local/share/man:/opt/local/man:$MANPATH
     # Homebrew
     PATH="$(brew --prefix)/bin:$PATH"
     # Homebrew Cask
     export HOMEBREW_CASK_OPTS="--appdir=/Applications --caskroom=/usr/local/Caskroom"
     # Python
-    export PATH=$PATH:/usr/local/share/python
+    PATH=$PATH:/usr/local/share/python
+    # Go
+    GOPATH=$HOME/go
   ;;
 esac
 
@@ -98,6 +101,8 @@ function cd() {
 }
 
 export PATH
+export MANPATH
+export GOPATH
 
 # 環境依存設定ファイル読み込み
 [ -f ~/.zshrc.git-flow-completion ] && source ~/.zshrc.git-flow-completion
@@ -105,3 +110,20 @@ export PATH
 # for tmux
 PS1="$PS1"'$([ -n "$TMUX" ] && tmux setenv TMUXPWD_$(tmux display -p "#D" | tr -d %) "$PWD")'
 
+
+# for peco
+function peco-select-history() {
+    local tac
+    if which tac > /dev/null; then
+        tac="tac"
+    else
+        tac="tail -r"
+    fi
+    BUFFER=$(history -n 1 | \
+        eval $tac | \
+        peco --query "$LBUFFER")
+    CURSOR=$#BUFFER
+    zle clear-screen
+}
+zle -N peco-select-history
+bindkey '^r' peco-select-history

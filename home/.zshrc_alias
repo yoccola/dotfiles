@@ -41,3 +41,5 @@ alias vgx='vagrant sandbox'
 alias az='azure'
 alias aza='azure account'
 
+# peco
+#alias pecos="ssh `grep '^Host\s' ~/.ssh/config| awk '{for(i=2;i<=NF;i++) print $i;}' | peco`"
