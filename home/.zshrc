@@ -127,3 +127,16 @@ function peco-select-history() {
 }
 zle -N peco-select-history
 bindkey '^r' peco-select-history
+
+function peco-snippets() {
+
+    BUFFER=$(grep -v "^#" ~/.snippets | peco --query "$LBUFFER")
+    zle clear-screen
+}
+
+zle -N peco-snippets
+bindkey '^x^s' peco-snippets
+
+
+# import local settings
+if [ -f ~/.zsh.`hostname -s` ] && source ~/.zsh.`hostname -s`
