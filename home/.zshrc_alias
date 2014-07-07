@@ -43,3 +43,4 @@ alias aza='azure account'
 
 # peco
 #alias pecos="ssh `grep '^Host\s' ~/.ssh/config| awk '{for(i=2;i<=NF;i++) print $i;}' | peco`"
+alias repo='cd $(find ~/work -maxdepth 2 -mindepth 2 -name "*" -type d | grep -v "\/\." | peco)'

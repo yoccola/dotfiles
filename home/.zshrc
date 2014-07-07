@@ -139,4 +139,4 @@ bindkey '^x^s' peco-snippets
 
 
 # import local settings
-if [ -f ~/.zshrc.local ] && source ~/.zshrc.local
+[ -f ~/.zshrc.local ] && source ~/.zshrc.local
