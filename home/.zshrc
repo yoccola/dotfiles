@@ -129,13 +129,11 @@ zle -N peco-select-history
 bindkey '^r' peco-select-history
 
 function peco-snippets() {
-
     BUFFER=$(grep -v "^#" ~/.snippets | peco --query "$LBUFFER")
     zle clear-screen
 }
-
 zle -N peco-snippets
-bindkey '^x^s' peco-snippets
+bindkey '^s' peco-snippets
 
 
 # import local settings
