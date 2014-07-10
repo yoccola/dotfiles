@@ -1,21 +1,25 @@
 #!/bin/sh
 
-while getopts a:r: OPT
+while getopts a:d: OPT
 do
   case $OPT in
     "a" ) FLG_A="TRUE" ; AUTHOR="$OPTARG";;
-    "r" ) FLG_R="TRUE" ; REV="$OPTARG";;
-      * ) echo "Usage: $CMDNAME [-a AUTHOR_NAME] [-r FROM_REVISION]" 1>&2
+    "d" ) FLG_R="TRUE" ; DATE="$OPTARG";;
+      * ) echo "Usage: $CMDNAME [-a AUTHOR_NAME] [-d FROM_DATE('yyyy-mm-dd')]" 1>&2
+    #"r" ) FLG_R="TRUE" ; REV="$OPTARG";;
+    #  * ) echo "Usage: $CMDNAME [-a AUTHOR_NAME] [-r FROM_REVISION]" 1>&2
           exit 1 ;;
   esac
 done
 
 if [ "$FLG_A" != "TRUE" ]; then
-  echo "Usage: $CMDNAME [-a AUTHOR_NAME] [-r FROM_REVISION]"
+  echo "Usage: $CMDNAME [-a AUTHOR_NAME] [-d FROM_DATE('yyyy-mm-dd')]" 1>&2
+  #echo "Usage: $CMDNAME [-a AUTHOR_NAME] [-r FROM_REVISION]"
   exit
 fi
 
 # TODO:execute directly
-echo "svn log -r{$REV}:HEAD -v | sed -n '/$AUTHOR/,/-----$/ p' | grep '^ ' | awk '{ print \$2 }' | sort -u"
+echo "svn log -r \{$DATE\}:HEAD -v | sed -n '/$AUTHOR/,/-----$/ p' | grep '^ ' | awk '{ print \$2 }' | sort -u"
+#echo "svn log -r{$REV}:HEAD -v | sed -n '/$AUTHOR/,/-----$/ p' | grep '^ ' | awk '{ print \$2 }' | sort -u"
 #svn log -r{$REV}:HEAD -v | sed -n '/$AUTHOR/,/-----$/ p' | grep '^ ' | awk '{ print $2 }' | sort -u
 
