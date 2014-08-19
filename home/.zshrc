@@ -66,6 +66,10 @@ if [[ -s ~/.rvm/scripts/rvm ]] ; then source ~/.rvm/scripts/rvm ; fi
 
 ### Environment dependence settings ###
 case "${OSTYPE}" in
+  linux*)
+    ### Command PATH
+    PATH=~/bin:$PATH
+  ;;
   darwin*)
   # for mac
 
