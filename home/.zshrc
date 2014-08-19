@@ -83,7 +83,7 @@ case "${OSTYPE}" in
     # Homebrew Cask
     export HOMEBREW_CASK_OPTS="--appdir=/Applications --caskroom=/usr/local/Caskroom"
     # Python
-    PATH=$PATH:/usr/local/share/python
+    PATH=$PATH:/usr/local/bin/python
     # Go
     GOPATH=$HOME/go
   ;;
