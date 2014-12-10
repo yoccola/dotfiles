@@ -24,9 +24,10 @@ alias treex="tree -NF | perl -pe 's/^├── //g; s/^└── //g; s/^│\xc2
 alias hs='homesick'
 
 # For Git
-alias gb='git branch'
-alias gst='git status -sb'
-alias glo='git log --oneline --decorate'
+alias g-b='git branch'
+alias g-s='git status -sb'
+alias g-lo='git log --oneline --decorate'
+alias g-ls='git log --stat --decorate'
 
 # For Vagrant
 alias vg='vagrant'

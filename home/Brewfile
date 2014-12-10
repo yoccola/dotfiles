@@ -68,6 +68,7 @@ install ruby-build || true
 install scons || true
 install sqlite || true
 install subversion17 || true
+install terminal-notifier || true
 install tig || true
 install tmux || true
 install tree || true
