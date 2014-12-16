@@ -1,0 +1,3 @@
+du -sh ./*
+svn log -r{193037}:HEAD -v | sed -n '/h-imai/,/-----$/ p' | grep '^ ' | awk '{ print $2 }' | sort -u
+ssh `grep '^Host\s' ~/.ssh/config| awk '{for(i=2;i<=NF;i++) print $i;}' | peco`

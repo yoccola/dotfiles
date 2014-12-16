@@ -19,15 +19,15 @@ function notify-error {
 # Notify of successful command termination, but only if it took at least
 # 30 seconds (and if the terminal is in background).
 function notify-success() {
-  local now diff start_time last_command
+  local now diff notify_start_time notify_last_command
 
-  start_time=$1
-  last_command="$2"
+  notify_start_time=$1
+  notify_last_command="$2"
   now=`date "+%s"`
 
-  ((diff = $now - $start_time ))
+  ((diff = $now - $notify_start_time ))
   if (( $diff > $NOTIFY_COMMAND_COMPLETE_TIMEOUT )); then
-    notify-if-background -t "#win" <<< "$last_command" &!
+    notify-if-background -t "#win" <<< "$notify_last_command" &!
   fi
 }
 
@@ -35,17 +35,17 @@ function notify-success() {
 function notify-command-complete() {
   last_status=$?
   if [[ $last_status -gt "0" ]]; then
-    notify-error <<< $last_command
-  elif [[ -n $start_time ]]; then
-    notify-success "$start_time" "$last_command"
+    notify-error <<< $notify_last_command
+  elif [[ -n $notify_start_time ]]; then
+    notify-success "$notify_start_time" "$notify_last_command"
   fi
-  unset last_command start_time last_status
+  unset notify_last_command notify_start_time last_status
 }
 
 function store-command-stats() {
-  last_command=$1
-  last_command_name=${1[(wr)^(*=*|sudo|ssh|-*)]}
-  start_time=`date "+%s"`
+  notify_last_command=$1
+  notify_last_command_name=${1[(wr)^(*=*|sudo|ssh|-*)]}
+  notify_start_time=`date "+%s"`
 }
 
 autoload add-zsh-hook
