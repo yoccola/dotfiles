@@ -28,6 +28,7 @@ alias g-b='git branch'
 alias g-s='git status -sb'
 alias g-lo='git log --oneline --decorate'
 alias g-ls='git log --stat --decorate'
+alias g-lg='git log --graph --decorate'
 
 # For Vagrant
 alias vg='vagrant'
