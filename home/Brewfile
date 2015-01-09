@@ -51,6 +51,7 @@ install neon || true
 install nginx ||  true
 install opam || true
 install openssl || true
+install pandoc || true
 install pcre || true
 install peco || true
 install pkg-config || true
