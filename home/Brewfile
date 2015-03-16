@@ -83,6 +83,7 @@ install zsh-completions || true
 # Applications
 cask install alfred || true
 cask install appcleaner || true
+cask install atom || true
 cask install dropbox || true
 cask install firefox || true
 cask install github || true
