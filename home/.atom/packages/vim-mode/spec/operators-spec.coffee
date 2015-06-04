@@ -19,9 +19,7 @@ describe "Operators", ->
     helpers.keydown(key, options)
 
   commandModeInputKeydown = (key, opts = {}) ->
-    opts.element = editor.commandModeInputView.editor.find('input').get(0)
-    opts.raw = true
-    keydown(key, opts)
+    editor.commandModeInputView.editorElement.getModel().setText(key)
 
   describe "cancelling operations", ->
     it "does not throw an error even if no operation is pending", ->
@@ -604,6 +602,13 @@ describe "Operators", ->
 
       it "saves the line to the a register", ->
         expect(vimState.getRegister('a').text).toBe "012 345\n"
+
+      it "appends the line to the A register", ->
+        keydown('"')
+        keydown('A', shift: true)
+        keydown('y')
+        keydown('y')
+        expect(vimState.getRegister('a').text).toBe "012 345\n012 345\n"
 
     describe "with a forward motion", ->
       beforeEach ->
@@ -1241,7 +1246,7 @@ describe "Operators", ->
 
     it "replaces a single character with a line break", ->
       keydown('r')
-      editor.commandModeInputView.editor.trigger 'core:confirm'
+      atom.commands.dispatch(editor.commandModeInputView.editorElement, 'core:confirm')
       expect(editor.getText()).toBe '\n2\n\n4\n\n'
       expect(editor.getCursorBufferPositions()).toEqual [[1, 0], [3, 0]]
 

@@ -40,7 +40,12 @@ class MinimapElement extends HTMLElement
     @subscriptions = new CompositeDisposable
     @initializeContent()
 
-    @subscriptions.add atom.themes.onDidChangeActiveThemes =>
+    # Uses of `atom.styles.onDidAddStyleElement` instead of
+    # `atom.themes.onDidChangeActiveThemes`.
+    # Why?
+    # Currently, The styleElement will be removed first,
+    # and then re-add. So the `change` event has not be triggered.
+    @subscriptions.add atom.styles.onDidAddStyleElement =>
       @invalidateCache()
       @requestForcedUpdate()
 
@@ -497,12 +502,12 @@ class MinimapElement extends HTMLElement
 
     document.body.addEventListener('mousemove', mousemoveHandler)
     document.body.addEventListener('mouseup', mouseupHandler)
-    document.body.addEventListener('mouseout', mouseupHandler)
+    document.body.addEventListener('mouseleave', mouseupHandler)
 
     @dragSubscription = new Disposable =>
       document.body.removeEventListener('mousemove', mousemoveHandler)
       document.body.removeEventListener('mouseup', mouseupHandler)
-      document.body.removeEventListener('mouseout', mouseupHandler)
+      document.body.removeEventListener('mouseleave', mouseupHandler)
 
   # Internal: The method called during the drag gesture.
   #

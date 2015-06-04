@@ -24,6 +24,7 @@ alias treex="tree -NF | perl -pe 's/^├── //g; s/^└── //g; s/^│\xc2
 alias hs='homesick'
 
 # For Git
+alias g-c='git checkout'
 alias g-b='git branch'
 alias g-s='git status -sb'
 alias g-lo='git log --oneline --decorate'

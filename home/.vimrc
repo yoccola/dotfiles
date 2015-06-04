@@ -1,3 +1,32 @@
+ " -------------------
+ " 色の設定
+ " -------------------
+ " 強調表示(色付け)のON
+ syntax on
+ 
+ " 形式の切り替え
+ set nocompatible
+
+ highlight LineNr ctermfg=darkyellow    " 行番号
+ "highlight SpecialKey ctermfg=grey " 特殊記号
+ highlight Comment ctermfg=Green
+" NeoBundle
+set nocompatible
+filetype off
+
+" NeoBundle
+if has('vim_starting')
+    set runtimepath+=~/.vim/bundle/neobundle.vim
+    call neobundle#begin(expand('~/.vim/bundle/'))
+    NeoBundleFetch 'Shougo/neobundle.vim'
+    call neobundle#end()
+endif
+
+" NeoBundle Plugins
+NeoBundle 'scrooloose/nerdtree'
+
+filetype plugin indent on
+
 " Vundle
 "set rtp+=~/.vim/bundle/vundle/
 "call vundle#rc()
@@ -15,18 +44,6 @@
 
 ":runtime macros/justify.vim
 
- " -------------------
- " 色の設定
- " -------------------
- " 強調表示(色付け)のON
- syntax on
- 
- " 形式の切り替え
- set nocompatible
-
- highlight LineNr ctermfg=darkyellow    " 行番号
- "highlight SpecialKey ctermfg=grey " 特殊記号
- highlight Comment ctermfg=Green
  
  " -------------------
  " スペース＆タブの設定
@@ -169,3 +186,5 @@ vnoremap J 10j
 vnoremap K 10k
 vnoremap L 10l
 vnoremap H 10h
+
+nnoremap <silent><C-e> :NERDTreeToggle<CR>

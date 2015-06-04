@@ -18,6 +18,7 @@ class VimState
   opStack: null
   mode: null
   submode: null
+  destroyed: false
 
   constructor: (@editorElement, @statusBarManager, @globalVimState) ->
     @emitter = new Emitter
@@ -26,6 +27,7 @@ class VimState
     @opStack = []
     @history = []
     @marks = {}
+    @subscriptions.add @editor.onDidDestroy => @destroy()
 
     @subscriptions.add @editor.onDidChangeSelectionRange =>
       if _.all(@editor.getSelections(), (selection) -> selection.isEmpty())
@@ -41,11 +43,16 @@ class VimState
       @activateCommandMode()
 
   destroy: ->
-    @subscriptions.dispose()
-    @deactivateInsertMode()
-    @editorElement.component.setInputEnabled(true)
-    @editorElement.classList.remove("vim-mode")
-    @editorElement.classList.remove("command-mode")
+    unless @destroyed
+      @destroyed = true
+      @subscriptions.dispose()
+      if @editor.isAlive()
+        @deactivateInsertMode()
+        @editorElement.component?.setInputEnabled(true)
+        @editorElement.classList.remove("vim-mode")
+        @editorElement.classList.remove("command-mode")
+      @editor = null
+      @editorElement = null
 
   # Private: Creates the plugin's bindings
   #
@@ -277,7 +284,7 @@ class VimState
       type = Utils.copyType(text)
       {text, type}
     else
-      @globalVimState.registers[name]
+      @globalVimState.registers[name.toLowerCase()]
 
   # Private: Fetches the value of a given mark.
   #
@@ -303,8 +310,26 @@ class VimState
       atom.clipboard.write(value.text)
     else if name == '_'
       # Blackhole register, nothing to do
+    else if /^[A-Z]$/.test(name)
+      @appendRegister(name.toLowerCase(), value)
     else
       @globalVimState.registers[name] = value
+
+
+  # Private: append a value into a given register
+  # like setRegister, but appends the value
+  appendRegister: (name, value) ->
+    register = @globalVimState.registers[name] ?=
+      type: 'character'
+      text: ""
+    if register.type is 'linewise' and value.type isnt 'linewise'
+      register.text += value.text + '\n'
+    else if register.type isnt 'linewise' and value.type is 'linewise'
+      register.text += '\n' + value.text
+      register.type = 'linewise'
+    else
+      register.text += value.text
+
 
   # Private: Sets the value of a given mark.
   #
@@ -351,7 +376,7 @@ class VimState
     @changeModeClass('command-mode')
 
     @clearOpStack()
-    selection.clear() for selection in @editor.getSelections()
+    selection.clear(autoscroll: false) for selection in @editor.getSelections()
 
     @updateStatusBar()
 
@@ -444,6 +469,8 @@ class VimState
   registerPrefix: (e) ->
     keyboardEvent = e.originalEvent?.originalEvent ? e.originalEvent
     name = atom.keymap.keystrokeForKeyboardEvent(keyboardEvent)
+    if name.lastIndexOf('shift-', 0) is 0
+      name = name.slice(6)
     new Prefixes.Register(name)
 
   # Private: A generic way to create a Number prefix based on the event.
@@ -507,4 +534,4 @@ class VimState
       @opStack.length > 0
 
   updateStatusBar: ->
-    @statusBarManager.update(@mode)
+    @statusBarManager.update(@mode, @submode)

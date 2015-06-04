@@ -90,6 +90,7 @@ case "${OSTYPE}" in
     PATH=$PATH:/usr/local/bin/python
     # Go
     GOPATH=$HOME/go
+    PATH=$PATH:$GOPATH/bin
     # source
     source ~/.zsh.d/zsh-notify/notify.plugin.zsh
     # terminal-notifier

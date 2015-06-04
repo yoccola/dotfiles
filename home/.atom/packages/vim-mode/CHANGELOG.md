@@ -1,5 +1,15 @@
 ## HEAD
 
+## 0.41
+
+* Added ability to append to register - @jacekkopecky
+* Fixed an issue where deactivation would sometimes fail
+
+## 0.40
+
+* Fixed an issue where the search input text was not visible - @tmm1 
+* Added a different status-bar entry for visual-line mode - @jacekkopecky
+
 ## 0.39
 
 * Made repeating insertions work more correctly with multiple cursors

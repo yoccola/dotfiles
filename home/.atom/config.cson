@@ -6,6 +6,7 @@
     showIndentGuide: true
     fontSize: 14
     tabLength: 4
+    preferredLineLength: 140
   core: {}
   "exception-reporting":
     userId: "90516ede-7f18-4ad0-2857-33f7e93b67a5"

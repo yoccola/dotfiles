@@ -1,7 +1,7 @@
 {
   "name": "minimap",
   "main": "./lib/main",
-  "version": "4.6.0",
+  "version": "4.7.1",
   "private": true,
   "description": "A preview of the full source code.",
   "author": {
@@ -49,10 +49,10 @@
     "url": "https://github.com/atom-minimap/minimap/issues"
   },
   "homepage": "https://github.com/atom-minimap/minimap",
-  "_id": "minimap@4.6.0",
-  "_shasum": "79d28aad30e4d036e79c69920e04c3ee187f4d60",
-  "_resolved": "file:../d-115216-57981-iorvxi/package.tgz",
-  "_from": "../d-115216-57981-iorvxi/package.tgz",
+  "_id": "minimap@4.7.1",
+  "_shasum": "a07fcb06f12d7086f382f319e784c704c1388b29",
+  "_resolved": "file:../d-11531-8593-17pgxgv/package.tgz",
+  "_from": "../d-11531-8593-17pgxgv/package.tgz",
   "_atomModuleCache": {
     "version": 1,
     "dependencies": [
@@ -73,7 +73,7 @@
       },
       {
         "name": "grim",
-        "version": "1.2.0",
+        "version": "1.2.1",
         "path": "node_modules/event-kit/node_modules/grim/lib/grim.js"
       },
       {
@@ -148,7 +148,7 @@
       },
       {
         "name": "fs-plus",
-        "version": "2.5.0",
+        "version": "2.6.0",
         "path": "node_modules/fs-plus/lib/fs-plus.js"
       },
       {
@@ -173,7 +173,7 @@
       },
       {
         "name": "semver",
-        "version": "4.3.1",
+        "version": "4.3.3",
         "path": "node_modules/semver/semver.js"
       },
       {
