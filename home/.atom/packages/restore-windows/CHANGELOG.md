@@ -1,3 +1,11 @@
+## 0.4.0
+* Prevent some unhandled exception
+* Add hashed filename validation
+* Prevent same project has two window
+* New Config API
+* Add spec
+* Support multiple root folders
+
 ## 0.3.2 - Fix some issue
 * Check existence of project path on restoring
 

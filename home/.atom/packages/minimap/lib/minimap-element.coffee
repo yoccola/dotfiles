@@ -40,21 +40,12 @@ class MinimapElement extends HTMLElement
     @subscriptions = new CompositeDisposable
     @initializeContent()
 
-    # Uses of `atom.styles.onDidAddStyleElement` instead of
-    # `atom.themes.onDidChangeActiveThemes`.
-    # Why?
-    # Currently, The styleElement will be removed first,
-    # and then re-add. So the `change` event has not be triggered.
-    @subscriptions.add atom.styles.onDidAddStyleElement =>
-      @invalidateCache()
-      @requestForcedUpdate()
-
     @observeConfig
       'minimap.displayMinimapOnLeft': (displayMinimapOnLeft) =>
         swapPosition = @minimap? and displayMinimapOnLeft isnt @displayMinimapOnLeft
         @displayMinimapOnLeft = displayMinimapOnLeft
 
-        @swapMinimapPosition() if swapPosition
+        @swapMinimapPosition()
 
       'minimap.minimapScrollIndicator': (@minimapScrollIndicator) =>
         if @minimapScrollIndicator and not @scrollIndicator?
@@ -82,12 +73,31 @@ class MinimapElement extends HTMLElement
       'minimap.useHardwareAcceleration': (@useHardwareAcceleration) =>
         @requestUpdate() if @attached
 
+      'minimap.absoluteMode': (@absoluteMode) =>
+        @classList.toggle('absolute', @absoluteMode)
+
+      'editor.preferredLineLength': => @requestUpdate() if @attached
+
+      'editor.softWrap': => @requestUpdate() if @attached
+
+      'editor.softWrapAtPreferredLineLength': => @requestUpdate() if @attached
+
+
   # Internal: DOM callback invoked when a new {MinimapElement} is attached
   # to the DOM.
   attachedCallback: ->
     @subscriptions.add atom.views.pollDocument => @pollDOM()
     @measureHeightAndWidth()
     @attached = true
+
+    # Uses of `atom.styles.onDidAddStyleElement` instead of
+    # `atom.themes.onDidChangeActiveThemes`.
+    # Why?
+    # Currently, The styleElement will be removed first,
+    # and then re-add. So the `change` event has not be triggered.
+    @subscriptions.add atom.styles.onDidAddStyleElement =>
+      @invalidateCache()
+      @requestForcedUpdate()
 
   # Internal: DOM callback invoked when a new {MinimapElement} is detached
   # from the DOM.
@@ -113,18 +123,18 @@ class MinimapElement extends HTMLElement
   # `displayMinimapOnLeft` setting.
   attach: ->
     return if @attached
+    @getTextEditorElementRoot().appendChild(this)
     @swapMinimapPosition()
     @attached = true
 
   # Attaches the {MinimapElement} to the left of the target {TextEditorElement}.
   attachToLeft: ->
-    root = @getTextEditorElementRoot()
-    root.insertBefore(this, root.children[0])
+    @classList.add('left')
 
   # Attaches the {MinimapElement} to the right of the target
   # {TextEditorElement}.
   attachToRight: ->
-    @getTextEditorElementRoot().appendChild(this)
+    @classList.remove('left')
 
   # Swaps the {MinimapElement} position based on the value of the
   # `displayMinimapOnLeft` setting.
@@ -144,6 +154,7 @@ class MinimapElement extends HTMLElement
   destroy: ->
     @subscriptions.dispose()
     @detach()
+    @minimap = null
 
   #     ######   #######  ##    ## ######## ######## ##    ## ########
   #    ##    ## ##     ## ###   ##    ##    ##       ###   ##    ##
@@ -177,11 +188,13 @@ class MinimapElement extends HTMLElement
     @addEventListener 'mousewheel', elementMousewheel
     @canvas.addEventListener 'mousedown', canvasMousedown
     @visibleArea.addEventListener 'mousedown', visibleAreaMousedown
+    @visibleArea.addEventListener 'touchstart', visibleAreaMousedown
 
     @subscriptions.add new Disposable =>
       @removeEventListener 'mousewheel', elementMousewheel
       @canvas.removeEventListener 'mousedown', canvasMousedown
       @visibleArea.removeEventListener 'mousedown', visibleAreaMousedown
+      @visibleArea.removeEventListener 'touchstart', visibleAreaMousedown
 
   # Initializes the scroll indicator div when the `minimapScrollIndicator`
   # settings is enabled.
@@ -219,9 +232,9 @@ class MinimapElement extends HTMLElement
           @quickSettingsSubscription = @quickSettingsElement.onDidDestroy =>
             @quickSettingsElement = null
 
-          @quickSettingsElement.attach()
           {top, left, right} = @canvas.getBoundingClientRect()
           @quickSettingsElement.style.top = top + 'px'
+          @quickSettingsElement.attach()
 
           if @displayMinimapOnLeft
             @quickSettingsElement.style.left = (right) + 'px'
@@ -321,7 +334,7 @@ class MinimapElement extends HTMLElement
 
   # Internal: Performs the actual {MinimapElement} update.
   update: ->
-    return unless @attached and @isVisible() and not @minimap.isDestroyed()
+    return unless @attached and @isVisible() and @minimap?
 
     if @adjustToSoftWrap and @marginRight?
       @style.marginRight = @marginRight + 'px'
@@ -330,14 +343,16 @@ class MinimapElement extends HTMLElement
 
     visibleAreaLeft = @minimap.getTextEditorScaledScrollLeft()
     visibleAreaTop = @minimap.getTextEditorScaledScrollTop() - @minimap.getScrollTop()
+    visibleWidth = Math.min(@canvas.width / devicePixelRatio, @width)
+
 
     @applyStyles @visibleArea,
-      width: @clientWidth + 'px'
+      width: visibleWidth + 'px'
       height: @minimap.getTextEditorScaledHeight() + 'px'
       transform: @makeTranslate(visibleAreaLeft, visibleAreaTop)
 
     @applyStyles @controls,
-      width: Math.min(@canvas.width / devicePixelRatio, @width) + 'px'
+      width: visibleWidth + 'px'
 
     canvasTop = @minimap.getFirstVisibleScreenRow() * @minimap.getLineHeight() - @minimap.getScrollTop()
 
@@ -369,10 +384,11 @@ class MinimapElement extends HTMLElement
 
   # Internal: Polling callback used to detect visibility and size changes.
   pollDOM: ->
+    visibilityChanged = @checkForVisibilityChange()
     if @isVisible()
-      @requestForcedUpdate() unless !@wasVisible
+      @requestForcedUpdate() unless @wasVisible
 
-      @measureHeightAndWidth(false)
+      @measureHeightAndWidth(visibilityChanged, false)
 
   # Internal: A method that checks for visibility changes in the
   # {MinimapElement}. The method returns `true` when the visibility changed
@@ -397,9 +413,8 @@ class MinimapElement extends HTMLElement
   #
   # forceUpdate - A {Boolean} that forces the update even when no changes were
   #               detected.
-  measureHeightAndWidth: (forceUpdate=true) ->
+  measureHeightAndWidth: (visibilityChanged, forceUpdate=true) ->
     wasResized = @width isnt @clientWidth or @height isnt @clientHeight
-    visibilityChanged = @checkForVisibilityChange()
 
     @height = @clientHeight
     @width = @clientWidth
@@ -448,9 +463,17 @@ class MinimapElement extends HTMLElement
   # {MinimapElement} canvas.
   #
   # event - The {Event} object.
-  mousePressedOverCanvas: ({which, pageY, target}) ->
-    return if which isnt 1
+  mousePressedOverCanvas: (e) ->
+    if e.which is 1
+      @leftMousePressedOverCanvas(e)
+    else if e.which is 2
+      @middleMousePressedOverCanvas(e)
+      # @requestForcedUpdate()
+      {top, height} = @visibleArea.getBoundingClientRect()
+      @startDrag({which: 2, pageY: top + height/2}) # ugly hack
+    else return
 
+  leftMousePressedOverCanvas: ({pageY, target}) ->
     y = pageY - target.getBoundingClientRect().top
     row = Math.floor(y / @minimap.getLineHeight()) + @minimap.getFirstVisibleScreenRow()
 
@@ -461,11 +484,21 @@ class MinimapElement extends HTMLElement
     if atom.config.get('minimap.scrollAnimation')
       from = textEditor.getScrollTop()
       to = scrollTop
-      step = (now) => textEditor.setScrollTop(now)
+      step = (now) -> textEditor.setScrollTop(now)
       duration = atom.config.get('minimap.scrollAnimationDuration')
       @animate(from: from, to: to, duration: duration, step: step)
     else
       textEditor.setScrollTop(scrollTop)
+
+  middleMousePressedOverCanvas: ({pageY}) ->
+    {top: offsetTop} = @getBoundingClientRect()
+    y = pageY - offsetTop - @minimap.getTextEditorScaledHeight()/2
+
+    ratio = y /
+      (@minimap.getVisibleHeight() - @minimap.getTextEditorScaledHeight())
+
+    @minimap.textEditor.setScrollTop(
+      ratio * @minimap.getTextEditorMaxScrollTop())
 
   # Internal: A method that relays the `mousewheel` events received by
   # the {MinimapElement} to the {TextEditorElement}.
@@ -488,8 +521,11 @@ class MinimapElement extends HTMLElement
   # area that starts the dragging gesture.
   #
   # event - The {Event} object.
-  startDrag: ({which, pageY}) ->
-    return if which isnt 1
+  startDrag: (e) ->
+    {which, pageY} = e
+    return unless @minimap
+    return if which isnt 1 and which isnt 2 and not e.touches?
+
     {top} = @visibleArea.getBoundingClientRect()
     {top: offsetTop} = @getBoundingClientRect()
 
@@ -504,10 +540,16 @@ class MinimapElement extends HTMLElement
     document.body.addEventListener('mouseup', mouseupHandler)
     document.body.addEventListener('mouseleave', mouseupHandler)
 
-    @dragSubscription = new Disposable =>
+    document.body.addEventListener('touchmove', mousemoveHandler)
+    document.body.addEventListener('touchend', mouseupHandler)
+
+    @dragSubscription = new Disposable ->
       document.body.removeEventListener('mousemove', mousemoveHandler)
       document.body.removeEventListener('mouseup', mouseupHandler)
       document.body.removeEventListener('mouseleave', mouseupHandler)
+
+      document.body.removeEventListener('touchmove', mousemoveHandler)
+      document.body.removeEventListener('touchend', mouseupHandler)
 
   # Internal: The method called during the drag gesture.
   #
@@ -518,7 +560,8 @@ class MinimapElement extends HTMLElement
   #           offsetTop - The {MinimapElement} offset at the moment of the
   #                       drag start.
   drag: (e, initial) ->
-    return if e.which isnt 1
+    return unless @minimap
+    return if e.which isnt 1 and e.which isnt 2 and not e.touches?
     y = e.pageY - initial.offsetTop - initial.dragOffset
 
     ratio = y / (@minimap.getVisibleHeight() - @minimap.getTextEditorScaledHeight())
@@ -534,6 +577,7 @@ class MinimapElement extends HTMLElement
   #           offsetTop - The {MinimapElement} offset at the moment of the
   #                       drag start.
   endDrag: (e, initial) ->
+    return unless @minimap
     @dragSubscription.dispose()
 
   #     ######   ######   ######

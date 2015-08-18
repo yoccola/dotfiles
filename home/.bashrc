@@ -55,3 +55,7 @@ esac
 if [ -f ~/.bashrc_local ]; then
   . ~/.bashrc_local
 fi
+# enhancd
+if [ -f "/Users/macbookair/.enhancd/bash/enhancd.bash" ]; then
+    source "/Users/macbookair/.enhancd/bash/enhancd.bash"
+fi

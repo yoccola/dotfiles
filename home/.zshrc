@@ -10,6 +10,12 @@ if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
   source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
 fi
 
+# Source enhancd
+if [[ -f ~/.enhancd/enhancd.sh ]]; then
+  source ~/.enhancd/enhancd.sh
+fi
+
+
 # Customize to your needs...
 if [ -f ~/.zshrc_alias ]; then
   . ~/.zshrc_alias

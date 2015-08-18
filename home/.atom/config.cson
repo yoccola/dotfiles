@@ -4,10 +4,15 @@
     softWrap: true
     softWrapAtPreferredLineLength: true
     showIndentGuide: true
-    fontSize: 14
     tabLength: 4
     preferredLineLength: 140
-  core: {}
+  core:
+    themes: [
+      "atom-material-ui"
+      "atom-material-syntax"
+    ]
+    projectHome: "/Users/macbookair/Documents"
+    excludeVcsIgnoredPaths: false
   "exception-reporting":
     userId: "90516ede-7f18-4ad0-2857-33f7e93b67a5"
   welcome:
@@ -19,3 +24,10 @@
     windowY: 23
     windowWidth: 1362
     windowHeight: 814
+  minimap:
+    plugins:
+      "minimap-autohide": true
+      bookmarks: true
+  "tree-view": {}
+  "vim-mode":
+    useSmartcaseForSearch: true

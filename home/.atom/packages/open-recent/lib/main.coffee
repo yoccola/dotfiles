@@ -29,7 +29,7 @@ OpenRecent.prototype.onLocalStorageEvent = (e) ->
     @update()
 
 OpenRecent.prototype.onUriOpened = ->
-  editor = atom.workspace.getActiveEditor()
+  editor = atom.workspace.getActiveTextEditor()
   filePath = editor?.buffer?.file?.path
 
   # Ignore anything thats not a file.
@@ -133,7 +133,7 @@ OpenRecent.prototype.init = ->
   @update()
 
 OpenRecent.prototype.insertCurrentPaths = ->
-  return unless atom.project.getRootDirectory()
+  return unless atom.project.getDirectories().length > 0
 
   recentPaths = @db.get('paths')
   for projectDirectory, index in atom.project.getDirectories()
@@ -185,14 +185,28 @@ OpenRecent.prototype.createSubmenu = ->
   recentFiles = @db.get('files')
   if recentFiles.length
     for index, path of recentFiles
-      submenu.push { label: path, command: "open-recent:open-recent-file-#{index}" }
+      menuItem = {
+        label: path
+        command: "open-recent:open-recent-file-#{index}"
+      }
+      if path.length > 100
+        menuItem.label = path.substr(-60)
+        menuItem.sublabel = path
+      submenu.push menuItem
     submenu.push { type: "separator" }
 
   # Root Paths
   recentPaths = @db.get('paths')
   if recentPaths.length
     for index, path of recentPaths
-      submenu.push { label: path, command: "open-recent:open-recent-path-#{index}" }
+      menuItem = {
+        label: path
+        command: "open-recent:open-recent-path-#{index}"
+      }
+      if path.length > 100
+        menuItem.label = path.substr(-60)
+        menuItem.sublabel = path
+      submenu.push menuItem
     submenu.push { type: "separator" }
 
   submenu.push { command: "open-recent:clear", label: "Clear List" }
@@ -204,8 +218,13 @@ OpenRecent.prototype.updateMenu = ->
     if dropdown.label is "File" or dropdown.label is "&File"
       for item in dropdown.submenu
         if item.command is "pane:reopen-closed-item" or item.label is "Open Recent"
+          delete item.accelerator
           delete item.command
+          delete item.click
           item.label = "Open Recent"
+          item.enabled = true
+          item.metadata ?= {}
+          item.metadata.windowSpecific = false
           item.submenu = @createSubmenu()
           atom.menu.update()
           break # break for item
@@ -223,17 +242,29 @@ OpenRecent.prototype.destroy = ->
 
 #--- Module
 module.exports =
-  configDefaults:
-    maxRecentFiles: 8
-    maxRecentDirectories: 8
-    replaceNewWindowOnOpenDirectory: true
-    replaceProjectOnOpenDirectory: false
-    listDirectoriesAddedToProject: false
+  config:
+    maxRecentFiles:
+      type: 'number'
+      default: 8
+    maxRecentDirectories:
+      type: 'number'
+      default: 8
+    replaceNewWindowOnOpenDirectory:
+      type: 'boolean'
+      default: true
+      description: 'When checked, opening a recent directory will "open" in the current window, but only if the window does not have a project path set. Eg: The window that appears when doing File > New Window.'
+    replaceProjectOnOpenDirectory:
+      type: 'boolean'
+      default: false
+      description: 'When checked, opening a recent directory will "open" in the current window, replacing the current project.'
+    listDirectoriesAddedToProject:
+      type: 'boolean'
+      default: false
+      description: 'When checked, the all root directories in a project will be added to the history and not just the 1st root directory.'
 
   model: null
 
   activate: ->
-    atom.config.setDefaults('open-recent', @configDefaults)
     @model = new OpenRecent()
     @model.init()
 

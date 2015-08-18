@@ -1,7 +1,7 @@
 {
   "name": "restore-windows",
   "main": "./lib/restore-windows",
-  "version": "0.3.2",
+  "version": "0.4.1",
   "description": "Restore windows on launching Atom.",
   "repository": {
     "type": "git",
@@ -9,7 +9,7 @@
   },
   "license": "MIT",
   "engines": {
-    "atom": ">=0.124.0"
+    "atom": ">=0.188.0 <2.0.0"
   },
   "dependencies": {
     "fs-plus": "^2.2.6"
@@ -20,16 +20,16 @@
     "url": "https://github.com/norio-nomura/restore-windows/issues"
   },
   "homepage": "https://github.com/norio-nomura/restore-windows",
-  "_id": "restore-windows@0.3.2",
-  "_shasum": "8670ad1853ee5c9cb47add34e5a45286d2d36c02",
-  "_resolved": "file:../d-115216-57195-es7o5v/package.tgz",
-  "_from": "../d-115216-57195-es7o5v/package.tgz",
+  "_id": "restore-windows@0.4.1",
+  "_shasum": "51288a7555827b79c86c897d843a3d5bce5f64df",
+  "_resolved": "file:../d-115624-16460-mdp9q0/package.tgz",
+  "_from": "../d-115624-16460-mdp9q0/package.tgz",
   "_atomModuleCache": {
     "version": 1,
     "dependencies": [
       {
         "name": "fs-plus",
-        "version": "2.5.0",
+        "version": "2.8.1",
         "path": "node_modules/fs-plus/lib/fs-plus.js"
       },
       {
@@ -88,7 +88,8 @@
       {
         "paths": [
           "lib",
-          ""
+          "",
+          "spec"
         ],
         "dependencies": {
           "fs-plus": "^2.2.6"
