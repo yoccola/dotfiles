@@ -8,7 +8,7 @@
     preferredLineLength: 140
   core:
     themes: [
-      "atom-material-ui"
+      "nucleus-dark-ui"
       "atom-material-syntax"
     ]
     projectHome: "/Users/macbookair/Documents"

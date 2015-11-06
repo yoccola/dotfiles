@@ -10,40 +10,28 @@
  highlight LineNr ctermfg=darkyellow    " 行番号
  "highlight SpecialKey ctermfg=grey " 特殊記号
  highlight Comment ctermfg=Green
-" NeoBundle
-set nocompatible
-filetype off
 
-" NeoBundle
+" for NeoBundle
+if 0 | endif
+
 if has('vim_starting')
-    set runtimepath+=~/.vim/bundle/neobundle.vim
-    call neobundle#begin(expand('~/.vim/bundle/'))
-    NeoBundleFetch 'Shougo/neobundle.vim'
-    call neobundle#end()
+  set runtimepath+=~/.vim/bundle/neobundle.vim/
 endif
 
-" NeoBundle Plugins
+call neobundle#begin(expand('~/.vim/bundle/'))
+
+"" NeoBundle Plugins
+"NeoBundleFetch 'Shougo/neobundle.vim'
 NeoBundle 'scrooloose/nerdtree'
+NeoBundle 'fatih/vim-go'
+
+"" filetype plugin indent on
+NeoBundleCheck
+
+call neobundle#end()
+
 
 filetype plugin indent on
-
-" Vundle
-"set rtp+=~/.vim/bundle/vundle/
-"call vundle#rc()
-
-"" Vundle Plugins
-"Bundle 'php.vim-for-php5'
-"Bundle 'cake.vim'
-"Bundle 'unite.vim'
-"Bundle 'unite-yarm'
-"Bundle 'unite-gem'
-"Bundle 'unite-locate'
-"Bundle 'unite-font'
-"Bundle 'unite-colorscheme'
-"Bundle 'sudo.vim'
-
-":runtime macros/justify.vim
-
  
  " -------------------
  " スペース＆タブの設定
