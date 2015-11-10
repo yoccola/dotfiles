@@ -1,114 +1,170 @@
-untap phinze/homebrew-cask || true
-untap homebrew/versions || true
-untap homebrew/dupes || true
-untap josegonzalez/homebrew-php || true
-untap jimbojsb/launchrocket || true
-untap peco/peco || true
-
-tap homebrew/dupes || true
-tap josegonzalez/homebrew-php || true
-tap phinze/homebrew-cask || true
-tap homebrew/versions || true
-tap jimbojsb/launchrocket || true
-tap peco/peco || true
-update || true
-
-install apple-gcc42 || true
-install autoconf || true
-install automake || true
-install brew-cask || true
-install cmake || true
-install cpanminus || true
-install curl || true
-install fish || true
-install fontconfig || true
-install fontforge || true
-install freetype || true
-install gettext || true
-install gibo || true
-install git || true
-install git-flow || true
-install go || true
-install grep || true
-install heroku-toolbelt || true
-install htop-osx || true
-install hub || true
-install icu4c || true
-install jasper || true
-install jpeg || true
-install jq || true
-install libevent || true
-install libicns || true
-install libpng || true
-install libtiff || true
-install libtool || true
-install libyaml || true
-install little-cms || true
-install llvm || true
-install mecab || true
-install mecabipadic || true
-install memcached || true
-install mysql || true
-install neon || true
-install nginx ||  true
-install opam || true
-install openssl || true
-install pandoc || true
-install pcre || true
-install peco || true
-install pkg-config || true
-install phpstorm || true
-install pwgen || true
-#install python3 || true
-install python || true
-install rbenv || true
-install rbenv-gem-rehash || true
-install rbenv-gemset || true
-install readline || true
-install redis || true
-install rpm2cpio || true
-install ruby-build || true
-install scons || true
-install sqlite || true
-install sshfs || true
-install subversion17 || true
-install terminal-notifier || true
-install tig || true
-install tmux || true
-install tree || true
-install wget || true
-install wine3 || true
-install xctool || true
-install xz || true
-install zsh || true
-install zsh-completions || true
-
-# Applications
-cask install alfred || true
-cask install appcleaner || true
-cask install atom || true
-cask install dropbox || true
-cask install firefox || true
-cask install github || true
-cask install google-chrome || true
-cask install haroopad || true
-cask install hipchat || true
-cask install iterm2 || true
-cask install keyremap4macbook || true
-cask install kindle || true
-cask install kobito || true
-cask install launchrocket || true
-cask install skype || true
-cask install sourcetree || true
-cask install sublime-text || true
-cask install totalfinder || true
-cask install totalterminal || true
-cask install vagrant || true
-cask install virtualbox || true
-
-# Settings
-cask alfred
-cask alfred link
-
-# Remove outdated versions
-cleanup
+tap 'brona/iproute2mac'
+tap 'caskroom/cask'
+tap 'homebrew/boneyard'
+tap 'homebrew/brewdler'
+tap 'homebrew/dupes'
+tap 'homebrew/fuse'
+tap 'homebrew/versions'
+tap 'jimbojsb/launchrocket'
+tap 'josegonzalez/php'
+tap 'peco/peco'
+tap 'phinze/cask'
+brew 'icu4c'
+brew 'boost'
+brew 'cmake'
+brew 're2c'
+brew 'scons'
+brew 'bison'
+brew 'gringo'
+brew 'clasp'
+brew 'aspcud'
+brew 'autoconf'
+brew 'xz'
+brew 'automake'
+brew 'bash-completion'
+brew 'c-ares'
+brew 'pkg-config'
+brew 'libpng'
+brew 'freetype'
+brew 'fontconfig'
+brew 'pixman'
+brew 'gettext'
+brew 'libffi'
+brew 'glib'
+brew 'cairo'
+brew 'ocaml'
+brew 'camlp4'
+brew 'libsigsegv'
+brew 'readline'
+brew 'clisp'
+brew 'cpanminus'
+brew 'openssl'
+brew 'curl'
+brew 'zeromq'
+brew 'czmq'
+brew 'd-bus'
+brew 'faac'
+brew 'fdk-aac'
+brew 'texi2html'
+brew 'sqlite'
+brew 'gdbm'
+brew 'python'
+brew 'yasm'
+brew 'pcre'
+brew 'git'
+brew 'x264'
+brew 'lame'
+brew 'libvo-aacenc'
+brew 'xvid'
+brew 'libtool'
+brew 'libogg'
+brew 'libvorbis'
+brew 'theora'
+brew 'libvpx'
+brew 'opencore-amr'
+brew 'fribidi'
+brew 'gobject-introspection'
+brew 'harfbuzz'
+brew 'libass'
+brew 'jpeg'
+brew 'libtiff'
+brew 'little-cms2'
+brew 'openjpeg'
+brew 'speex'
+brew 'orc'
+brew 'schroedinger'
+brew 'opus'
+brew 'ffmpeg', args: ['with-fdk-aac', 'with-libvorbis', 'with-libvpx', 'with-openjpeg', 'with-theora', 'with-opencore-amr', 'with-ffplay']
+brew 'fish'
+brew 'pango'
+brew 'fontforge'
+brew 'geoip'
+brew 'gibo'
+brew 'git-flow'
+brew 'gmp'
+brew 'libtasn1'
+brew 'nettle'
+brew 'gnutls'
+brew 'go'
+brew 'libyaml'
+brew 'ruby'
+brew 'heroku-toolbelt'
+brew 'htop-osx'
+brew 'hub'
+brew 'jasper'
+brew 'jq'
+brew 'libevent'
+brew 'libgpg-error'
+brew 'libgcrypt'
+brew 'libicns'
+brew 'libxml2'
+brew 'libxslt'
+brew 'little-cms'
+brew 'llvm'
+brew 'mad'
+brew 'mecab'
+brew 'mecab-ipadic'
+brew 'memcached'
+brew 'mercurial'
+brew 'mongodb'
+brew 'mysql'
+brew 'neon'
+brew 'nginx'
+brew 'node'
+brew 'opam'
+brew 'packer'
+brew 'pandoc'
+brew 'peco'
+brew 'pwgen'
+brew 'python3'
+brew 'ruby-build'
+brew 'rbenv'
+brew 'rbenv-gem-rehash'
+brew 'rbenv-gemset'
+brew 'redis'
+brew 'rpm2cpio'
+brew 'sdl'
+brew 'shtool'
+brew 'sleepwatcher'
+brew 'sox'
+brew 'terminal-notifier'
+brew 'tig'
+brew 'tmux'
+brew 'tree'
+brew 'unixodbc'
+brew 'wget'
+brew 'wireshark'
+brew 'zsh', args: ['disable-etcdir']
+brew 'zsh-completions'
+brew 'brona/iproute2mac/iproute2mac'
+brew 'caskroom/cask/brew-cask'
+brew 'homebrew/boneyard/celt'
+brew 'homebrew/dupes/apple-gcc42'
+brew 'homebrew/dupes/grep'
+brew 'homebrew/dupes/libiconv'
+brew 'homebrew/dupes/zlib'
+brew 'homebrew/fuse/sshfs'
+brew 'josegonzalez/php/php56'
+brew 'josegonzalez/php/composer'
+cask 'alfred'
+cask 'appcleaner'
+cask 'atom'
+cask 'dropbox'
+cask 'firefox'
+cask 'github'
+cask 'google-chrome'
+cask 'haroopad'
+cask 'hipchat'
+cask 'iterm2'
+cask 'keyremap4macbook'
+cask 'kindle'
+cask 'kobito'
+cask 'launchrocket'
+cask 'phpstorm'
+cask 'skype'
+cask 'sourcetree'
+cask 'sublime-text'
+cask 'totalfinder'
+cask 'totalterminal'
+cask 'vagrant'
+cask 'virtualbox'
