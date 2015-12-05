@@ -1,10 +1,3 @@
-#
-# Executes commands at the start of an interactive session.
-#
-# Authors:
-#   Sorin Ionescu <sorin.ionescu@gmail.com>
-#
-
 # Source Prezto.
 if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
   source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
@@ -20,6 +13,9 @@ fi
 if [ -f ~/.zshrc_alias ]; then
   . ~/.zshrc_alias
 fi
+
+source ~/.zsh/antigen/antigen.zsh
+antigen bundle sorin-ionescu/prezto
 
 autoload -Uz ~/bin/*
 
@@ -48,7 +44,7 @@ setopt extended_glob # グロブ機能を拡張する
 unsetopt caseglob    # ファイルグロブで大文字小文字を区別しない
 
 # すべてのヒストリを表示する
-#function hall { history -E 1 }
+function hall { history -E 1 }
 
 # ------------------------------
 # Look And Feel Settings
@@ -57,7 +53,7 @@ export CLICOLOR=true
 
 ### Title (user@hostname) ###
 case "${TERM}" in
-kterm*|xterm*|)
+kterm*|xterm*)
   precmd() {
     echo -ne "\033]0;${USER}@${HOST%%.*}\007"
   }
@@ -121,7 +117,7 @@ export MANPATH
 export GOPATH
 
 # 環境依存設定ファイル読み込み
-[ -f ~/.zshrc.git-flow-completion ] && source ~/.zshrc.git-flow-completion
+#[ -f ~/.zshrc.git-flow-completion ] && source ~/.zshrc.git-flow-completion
 
 # for tmux
 PS1="$PS1"'$([ -n "$TMUX" ] && tmux setenv TMUXPWD_$(tmux display -p "#D" | tr -d %) "$PWD")'
@@ -183,6 +179,10 @@ netstat () {
 route () {
   net_tools_deprecated_message
   echo 'Use `ip r`'
+}
+
+function _ssh {
+  compadd `fgrep 'Host ' ~/.ssh/config | awk '{print $2}' | sort`;
 }
 
 # import local settings

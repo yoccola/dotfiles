@@ -6,6 +6,7 @@
     showIndentGuide: true
     tabLength: 4
     preferredLineLength: 140
+    showInvisibles: true
   core:
     themes: [
       "nucleus-dark-ui"
@@ -31,3 +32,5 @@
   "tree-view": {}
   "vim-mode":
     useSmartcaseForSearch: true
+  "japanese-wrap":
+    characterWidth: {}
