@@ -28,11 +28,17 @@ alias gb='git branch'
 alias az='azure'
 alias aza='azure account'
 
+# other
+date='gdate'
+
 SVN_EDITOR='vi'
 EDITOR='vi'
 export SVN_EDITOR
 
 export PATH=~/bin:/usr/local/bin:$PATH
+
+# node
+export PATH=$HOME/.nodebrew/current/bin:$PATH
 
 # history
 export HISTSIZE=3000
@@ -59,3 +65,7 @@ fi
 if [ -f "/Users/macbookair/.enhancd/bash/enhancd.bash" ]; then
     source "/Users/macbookair/.enhancd/bash/enhancd.bash"
 fi
+
+# PlantUML
+export PLANTUML_LIMIT_SIZE=8192
+

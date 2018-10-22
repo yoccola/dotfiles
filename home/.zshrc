@@ -66,7 +66,7 @@ esac
 ### RVM ###
 if [[ -s ~/.rvm/scripts/rvm ]] ; then source ~/.rvm/scripts/rvm ; fi
 
-### Environment dependence settings ###
+## Environment dependence settings ###
 case "${OSTYPE}" in
   linux*)
     ### Command PATH
@@ -84,20 +84,23 @@ case "${OSTYPE}" in
     # Mac Ports
     PATH=/opt/local/bin:/opt/local/sbin:$PATH
     MANPATH=/opt/local/share/man:/opt/local/man:$MANPATH
-    # Homebrew
-    PATH="$(brew --prefix)/bin:$PATH"
-    # Homebrew Cask
-    export HOMEBREW_CASK_OPTS="--appdir=/Applications --caskroom=/usr/local/Caskroom"
+#    # Homebrew
+#    PATH="$(brew --prefix)/bin:$PATH"
+#    # Homebrew Cask
+#    export HOMEBREW_CASK_OPTS="--appdir=/Applications --caskroom=/usr/local/Caskroom"
     # Python
     PATH=$PATH:/usr/local/bin/python
     # Go
     GOPATH=$HOME/go
     PATH=$PATH:$GOPATH/bin
-    # source
-    source ~/.zsh.d/zsh-notify/notify.plugin.zsh
+#    # source
+#    source ~/.zsh.d/zsh-notify/notify.plugin.zsh
     # terminal-notifier
     export SYS_NOTIFIER="$(which terminal-notifier)"
     export NOTIFY_COMMAND_COMPLETE_TIMEOUT=10
+
+    # PlantUML
+    export PLANTUML_LIMIT_SIZE=8192
   ;;
 esac
 
@@ -117,7 +120,7 @@ export MANPATH
 export GOPATH
 
 # 環境依存設定ファイル読み込み
-#[ -f ~/.zshrc.git-flow-completion ] && source ~/.zshrc.git-flow-completion
+[ -f ~/.zshrc.git-flow-completion ] && source ~/.zshrc.git-flow-completion
 
 # for tmux
 PS1="$PS1"'$([ -n "$TMUX" ] && tmux setenv TMUXPWD_$(tmux display -p "#D" | tr -d %) "$PWD")'
@@ -187,3 +190,4 @@ function _ssh {
 
 # import local settings
 [ -f ~/.zshrc.local ] && source ~/.zshrc.local
+
