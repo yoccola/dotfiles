@@ -43,7 +43,6 @@ export PATH=$HOME/.nodebrew/current/bin:$PATH
 # history
 export HISTSIZE=3000
 
-
 # environment setting
 case "${OSTYPE}" in
   darwin*)
