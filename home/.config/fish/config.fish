@@ -43,3 +43,6 @@ set -x PLANTUML_LIMIT_SIZE 8192
 
 # Android SDK
 set -x PATH /Users/hi/Library/Android/sdk/platform-tools $PATH
+
+# rbenv
+status --is-interactive; and source (rbenv init -|psub)
