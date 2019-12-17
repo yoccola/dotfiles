@@ -1,13 +1,8 @@
-<<<<<<< HEAD:home/config.fish
 # PATH
 if status --is-login
     set -x PATH $PATH ~/bin
 end
 
-# rbenv
-set -x PATH $HOME/.rbenv/bin $PATH
-status --is-interactive; and source (rbenv init -|psub)
-=======
 # Path to Oh My Fish install.
 set -gx OMF_PATH "/Users/hi/.local/share/omf"
 
@@ -16,7 +11,6 @@ set -gx OMF_PATH "/Users/hi/.local/share/omf"
 
 # Load oh-my-fish configuration.
 source $OMF_PATH/init.fish
->>>>>>> b695d1224f0aec2fae472682ef916e152dfad091:home/.config/fish/config.fish
 
 # Variables
 set -gx AWS_REGION "ap-northeast-1"
@@ -24,7 +18,6 @@ set -gx AWS_REGION "ap-northeast-1"
 # aliases
 alias date='gdate'
 alias dc='docker-compose'
-
 
 # peco
 function peco_select_history_order
@@ -71,4 +64,5 @@ set -x PLANTUML_LIMIT_SIZE 8192
 set -x PATH /Users/hi/Library/Android/sdk/platform-tools $PATH
 
 # rbenv
+set -x PATH $HOME/.rbenv/bin $PATH
 status --is-interactive; and source (rbenv init -|psub)
