@@ -40,6 +40,10 @@ export PATH=~/bin:/usr/local/bin:$PATH
 # node
 export PATH=$HOME/.nodebrew/current/bin:$PATH
 
+# java
+export JAVA_HOME=`/usr/libexec/java_home`
+export PATH=$PATH:$JAVA_HOME/bin
+
 # history
 export HISTSIZE=3000
 
