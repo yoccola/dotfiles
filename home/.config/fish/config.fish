@@ -3,9 +3,6 @@ if status --is-login
     set -x PATH $PATH ~/bin
 end
 
-# Load oh-my-fish configuration.
-source $OMF_PATH/init.fish
-
 # Variables
 set -gx AWS_REGION "ap-northeast-1"
 
