@@ -47,7 +47,6 @@ export PATH=$PATH:$JAVA_HOME/bin
 # history
 export HISTSIZE=3000
 
-
 # environment setting
 case "${OSTYPE}" in
   darwin*)

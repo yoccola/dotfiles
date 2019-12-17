@@ -1,3 +1,4 @@
+<<<<<<< HEAD:home/config.fish
 # PATH
 if status --is-login
     set -x PATH $PATH ~/bin
@@ -6,12 +7,23 @@ end
 # rbenv
 set -x PATH $HOME/.rbenv/bin $PATH
 status --is-interactive; and source (rbenv init -|psub)
+=======
+# Path to Oh My Fish install.
+set -gx OMF_PATH "/Users/hi/.local/share/omf"
+
+# Customize Oh My Fish configuration path.
+#set -gx OMF_CONFIG "/Users/h-imai/.config/omf"
+
+# Load oh-my-fish configuration.
+source $OMF_PATH/init.fish
+>>>>>>> b695d1224f0aec2fae472682ef916e152dfad091:home/.config/fish/config.fish
 
 # Variables
 set -gx AWS_REGION "ap-northeast-1"
 
 # aliases
 alias date='gdate'
+alias dc='docker-compose'
 
 
 # peco
@@ -54,3 +66,9 @@ set -x JAVA_HOME (/usr/libexec/java_home)
 
 # PlantUML
 set -x PLANTUML_LIMIT_SIZE 8192
+
+# Android SDK
+set -x PATH /Users/hi/Library/Android/sdk/platform-tools $PATH
+
+# rbenv
+status --is-interactive; and source (rbenv init -|psub)
