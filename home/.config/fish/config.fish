@@ -44,6 +44,14 @@ function fish_user_key_bindings
   bind \cs 'pet-select --layout=bottom-up'
 end
 
+# google cloud
+function gce-ssh
+  set -l select (gcloud compute instances list --filter="STATUS:RUNNING" | /usr/local/bin/peco | awk '{print $1,$2}')
+  set -l host (echo $select | awk '{print $1}')
+  set -l zone (echo $select | awk '{print $2}')
+  gcloud compute ssh $host --internal-ip --zone $zone
+end
+
 # pyenv
 #status --is-interactive; and source (pyenv init -| psub)
 #set -x PATH $HOME/.pyenv/shims $PATH
@@ -52,6 +60,9 @@ set fish_function_path ~/.config/fish/functions/theme-pure $fish_function_path
 
 # Java
 set -x JAVA_HOME (/usr/libexec/java_home)
+
+# Rust
+source ~/.cargo/env.fish
 
 # PlantUML
 set -x PLANTUML_LIMIT_SIZE 8192
@@ -62,3 +73,9 @@ set -x PATH ~/Library/Android/sdk/platform-tools $PATH
 # rbenv
 set -x PATH $HOME/.rbenv/bin $PATH
 status --is-interactive; and source (rbenv init -|psub)
+
+# mysql
+fish_add_path /usr/local/opt/mysql-client/bin
+
+# Created by `pipx` on 2025-03-10 02:45:01
+set PATH $PATH /Users/hi/.local/bin

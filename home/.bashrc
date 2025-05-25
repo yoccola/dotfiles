@@ -71,3 +71,4 @@ fi
 
 # PlantUML
 export PLANTUML_LIMIT_SIZE=8192
+. "$HOME/.cargo/env"
