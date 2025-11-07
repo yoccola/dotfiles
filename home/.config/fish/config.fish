@@ -13,7 +13,10 @@ end
 
 
 # aliases
-alias dc='docker-compose'
+alias dc='docker compose'
+
+# Starship
+starship init fish | source
 
 # peco
 function peco_select_history_order
@@ -55,9 +58,6 @@ end
 # pyenv
 #status --is-interactive; and source (pyenv init -| psub)
 #set -x PATH $HOME/.pyenv/shims $PATH
-# THEME PURE #
-set fish_function_path ~/.config/fish/functions/theme-pure $fish_function_path
-
 # Java
 set -x JAVA_HOME (/usr/libexec/java_home)
 
@@ -71,8 +71,8 @@ set -x PLANTUML_LIMIT_SIZE 8192
 set -x PATH ~/Library/Android/sdk/platform-tools $PATH
 
 # rbenv
-set -x PATH $HOME/.rbenv/bin $PATH
-status --is-interactive; and source (rbenv init -|psub)
+#set -x PATH $HOME/.rbenv/bin $PATH
+#status --is-interactive; and source (rbenv init -|psub)
 
 # mysql
 fish_add_path /usr/local/opt/mysql-client/bin
