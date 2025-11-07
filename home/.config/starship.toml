@@ -1,0 +1,83 @@
+# Starship おすすめカスタム設定
+# バランスの取れた見やすい設定
+
+format = """
+$directory\
+$git_branch\
+$git_status\
+$python\
+$nodejs\
+$rust\
+$line_break\
+$character"""
+
+right_format = """
+$cmd_duration\
+$time"""
+
+# 視認性向上：プロンプト間に空行
+add_newline = true
+
+# スキャンタイムアウト（パフォーマンス向上）
+scan_timeout = 30
+
+[directory]
+truncation_length = 3
+truncate_to_repo = true
+style = "bold cyan"
+read_only = " 🔒"
+format = "[$path]($style)[$read_only]($read_only_style) "
+
+[character]
+success_symbol = "[➜](bold green)"
+error_symbol = "[✗](bold red)"
+vimcmd_symbol = "[❮](bold green)"
+
+[git_branch]
+symbol = " "
+format = "[$symbol$branch]($style) "
+style = "bold purple"
+
+[git_status]
+format = '([\[$all_status$ahead_behind\]]($style) )'
+style = "bold red"
+ahead = "⇡${count}"
+behind = "⇣${count}"
+diverged = "⇕⇡${ahead_count}⇣${behind_count}"
+modified = "!${count}"
+staged = "+${count}"
+untracked = "?${count}"
+deleted = "✘${count}"
+renamed = "»${count}"
+stashed = "≡"
+
+[cmd_duration]
+min_time = 2000
+format = "⏱ [$duration]($style)"
+style = "bold yellow"
+
+[time]
+disabled = false
+format = "🕐 [$time]($style)"
+time_format = "%T"
+style = "bold white"
+
+# 言語バージョン表示
+[python]
+symbol = " "
+format = '[$symbol$pyenv_prefix($version )(\($virtualenv\) )]($style)'
+style = "yellow"
+
+[nodejs]
+symbol = " "
+format = "[$symbol($version )]($style)"
+style = "green"
+
+[rust]
+symbol = " "
+format = "[$symbol($version )]($style)"
+style = "red"
+
+# 不要なモジュールを無効化（パフォーマンス向上）
+[package]
+disabled = true
